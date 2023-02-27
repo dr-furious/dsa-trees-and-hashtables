@@ -77,8 +77,8 @@ public class Node {
     public String toString() {
         String s = "[<" + this.getData() +
                 "> P:" + ((parent == null) ? "null" : parent.getData()) +
-                ",L:" + ((left == null) ? "null" : left.getData()) +
-                ",R:" + ((right == null) ? "null" : right.getData()) +
+                " L:" + ((left == null) ? "null" : left.getData()) +
+                " R:" + ((right == null) ? "null" : right.getData()) +
                 "] ";
         System.out.printf(s);
         return s;

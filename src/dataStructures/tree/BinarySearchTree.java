@@ -1,19 +1,26 @@
 package dataStructures.tree;
 
 public class BinarySearchTree {
-    private final Node root;
+    private Node root;
 
     // Constructors
+    public BinarySearchTree() {
+        this.root = null;
+    }
     public BinarySearchTree(Node root) {
         this.root = root;
     }
     public BinarySearchTree(int rootValue) {
         this.root = new Node(rootValue);
     }
+    public Node getRoot() {
+        return this.root;
+    }
 
     // Appends Node to the leaf of the tree according to the BST property PRIVATE!
     private void appendNode(Node root, int data) {
-        if (root == null) {
+        if (this.root == null) {
+            this.root = new Node(data);
             return;
         }
         if (data < root.getData()) {
@@ -31,11 +38,88 @@ public class BinarySearchTree {
         }
     }
 
+    private void appendNode(Node root, Node node) {
+        if (this.root == null) {
+            this.root = node;
+            return;
+        }
+        if (node.getData() < root.getData()) {
+            if (root.hasLeftChild()) {
+                appendNode(root.getLeft(), node);
+            } else {
+                root.setLeft(node);
+            }
+        } else if (node.getData() > root.getData()) {
+            if (root.hasRightChild()) {
+                appendNode(root.getRight(), node);
+            } else {
+                root.setRight(node);
+            }
+        }
+    }
+
     public void appendNode(int data) {
         appendNode(this.root, data);
     }
+    public void appendNode(Node node) {
+        appendNode(this.root, node);
+    }
 
     public void removeNode(int data) {
+        Node wanted = findNode(data);
+        if (wanted == null) {
+            return;
+        }
+        Node wantedParent = wanted.getParent();
+
+        // If removed node is leaf
+        if (!wanted.hasLeftChild() && !wanted.hasRightChild()) {
+            if (wantedParent == null) {
+                this.root = null;
+                return;
+            }
+            if (wantedParent.getLeft() == wanted) {
+                wantedParent.setLeft(null);
+            } else {
+                wantedParent.setRight(null);
+            }
+            return;
+        }
+
+        if (wanted.hasRightChild()) {
+            if (!wanted.hasLeftChild()) {
+                if (wantedParent == null) {
+                    wanted.getRight().setParent(null);
+                    this.root = wanted.getRight();
+                } else {
+                    wantedParent.setRight(null);
+                    appendNode(wantedParent, wanted.getRight());
+                }
+
+                return;
+            }
+
+            appendNode(wanted.getRight(), wanted.getLeft());
+            if (wantedParent == null) {
+                wanted.getRight().setParent(null);
+                this.root = wanted.getRight();
+            } else if (wantedParent.getRight() == wanted) {
+                wantedParent.setRight(wanted.getRight());
+            } else if (wantedParent.getLeft() == wanted) {
+                wantedParent.setLeft(wanted.getRight());
+            }
+        } else {
+            if (wantedParent == null) {
+                wanted.getLeft().setParent(null);
+                this.root = wanted.getLeft();
+            } else {
+                wantedParent.setRight(null);
+                appendNode(wantedParent, wanted.getLeft());
+            }
+
+        }
+
+
 
     }
 
@@ -80,7 +164,11 @@ public class BinarySearchTree {
 
     // Prints the tree
     public void print() {
-        int treeHeight = root.getHeight();
+        if (this.root == null) {
+            System.out.println("<null>");
+            return;
+        }
+        int treeHeight = this.root.getHeight();
 
         for (int i = 1; i < treeHeight+1; i++) {
             System.out.print("Level " + (i-1) + ": ");
