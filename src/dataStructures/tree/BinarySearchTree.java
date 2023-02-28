@@ -16,6 +16,9 @@ public class BinarySearchTree {
     public Node getRoot() {
         return this.root;
     }
+    public void setRoot(Node root) {
+         this.root = root;
+    }
 
     // Appends Node to the leaf of the tree according to the BST property PRIVATE!
     private void appendNode(Node root, int data) {

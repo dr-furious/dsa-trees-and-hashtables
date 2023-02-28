@@ -1,3 +1,4 @@
+import dataStructures.tree.AVLTree;
 import dataStructures.tree.BinarySearchTree;
 import dataStructures.tree.Node;
 
@@ -41,14 +42,17 @@ public class Main {
         Node root = new Node(3);
         root.setLeft(new Node(2));
         root.getLeft().setLeft(new Node(1));
-        //root.getLeft().getLeft().setLeft(new Node(0));
+        root.getLeft().getLeft().setLeft(new Node(0));
 
-        BinarySearchTree bst2 = new BinarySearchTree(root);
+        AVLTree bst2 = new AVLTree(root);
         bst2.print();
-        rotateRight(root.getLeft());
+        bst2.rotateRight(root.getLeft());
         BinarySearchTree bst3 = new BinarySearchTree(root);
         bst3.print();
-        //bst2.print();
+        bst2.rotateRight(root.getLeft());
+        bst3.print();
+        bst2.rotateLeft(root.getLeft().getRight());
+        bst3.print();
 
         /*          [4]
         *          /   \
@@ -62,78 +66,5 @@ public class Main {
         * */
     }
 
-    public static void rotateLeft(Node root) {
-        if (root == null) {
-            System.out.println("Root was null in rotateRight");
-            return;
-        }
-        Node rootParent = root.getParent();
-        Node leftChild = root.getLeft();
-        if (leftChild == null) {
-            System.out.println("LeftChild was null in rotateRight");
-            return;
-        }
-        Node leftChildRightChild = root.getLeft().getRight();
 
-        // Changing root's leftChild to point to root's parent and vice versa
-        if (rootParent == null) {
-            root.getLeft().setParent(null);
-        } else if (rootParent.getLeft() == root) {
-            rootParent.setLeft(leftChild);
-        } else if (rootParent.getRight() == root) {
-            rootParent.setRight(leftChild);
-        }
-
-        // Setting the root's leftChild's rightChild to be root
-        // so now root becomes rightChild of root's leftChild
-        leftChild.setRight(root);
-
-        // Root's leftChild previously had rightChild. Now we
-        // set root's leftChild to be this lost child
-        root.setLeft(leftChildRightChild);
-
-        BinarySearchTree bst2 = new BinarySearchTree(root.getParent());
-        bst2.print();
-
-        // TODO: Dont forget to change the root if the root is rotated!
-        // this.root = (rootParent == null) ? null : root.getParent();
-    }
-
-    // ?
-    public static void rotateRight(Node root) {
-        if (root == null) {
-            System.out.println("Root was null in rotateRight");
-            return;
-        }
-        Node rootParent = root.getParent();
-        Node leftChild = root.getLeft();
-        if (leftChild == null) {
-            System.out.println("LeftChild was null in rotateRight");
-            return;
-        }
-        Node leftChildRightChild = root.getLeft().getRight();
-
-        // Changing root's leftChild to point to root's parent and vice versa
-        if (rootParent == null) {
-            root.getLeft().setParent(null);
-        } else if (rootParent.getLeft() == root) {
-            rootParent.setLeft(leftChild);
-        } else if (rootParent.getRight() == root) {
-            rootParent.setRight(leftChild);
-        }
-
-        // Setting the root's leftChild's rightChild to be root
-        // so now root becomes rightChild of root's leftChild
-        leftChild.setRight(root);
-
-        // Root's leftChild previously had rightChild. Now we
-        // set root's leftChild to be this lost child
-        root.setLeft(leftChildRightChild);
-
-        BinarySearchTree bst2 = new BinarySearchTree(root.getParent());
-        bst2.print();
-
-        // TODO: Dont forget to change the root if the root is rotated!
-        // this.root = (rootParent == null) ? null : root.getParent();
-    }
 }
