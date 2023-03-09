@@ -1,40 +1,33 @@
 import dataStructures.tree.AVLTree;
-import dataStructures.tree.Node;
+import dataStructures.tree.BinarySearchTree;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
 
         AVLTree avlTree = new AVLTree();
+        int[] test1 = new int[100_000];
+        for (int i = 0; i < test1.length; i++) {
+            test1[i] = Tester.getRandomInt(0, 1_000_000);
+        }
 
-        avlTree.appendNode(3);
-        avlTree.appendNode(1);
-        avlTree.appendNode(2);
-        avlTree.appendNode(6);
-        avlTree.appendNode(5);
-        avlTree.appendNode(7);
-        avlTree.appendNode(20);
-        avlTree.appendNode(25);
-        avlTree.removeNode(20);
-        avlTree.removeNode(5);
-        avlTree.appendNode(0);
-        avlTree.appendNode(-5);
-        avlTree.appendNode(10);
-        avlTree.removeNode(6);
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < test1.length; i++) {
+            avlTree.appendNode(test1[i]);
+            //binarySearchTree.appendNode(test1[i]);
+        }
+        long stop = System.currentTimeMillis();
 
+        binarySearchTree.print();
         avlTree.print();
+        //System.out.println(Arrays.toString(test1));
 
-
-        /*          [4]
-        *          /   \
-        *         /     \
-        *        /       \
-        *       /         \
-        *     [2]         [8]
-        *    /   \       /   \
-        * [1]    [3]  [6]    [9]
-        *
-        * */
+        System.out.println(stop-start + " milliseconds -> " + toSeconds(stop-start) + " seconds");
     }
 
-
+    public static double toSeconds(long milliseconds) {
+        return milliseconds/1000.0;
+    }
 }

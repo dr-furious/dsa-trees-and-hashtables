@@ -16,13 +16,13 @@ public class AVLTree extends BinarySearchTree {
 
     @Override
     public void appendNode(int data) {
-        super.appendNode(data);
-        balance(getRoot());
+        Node node = appendNode(new Node(data));
+        balance(node.getParent());
     }
     @Override
     public void removeNode(int data) {
         super.removeNode(data);
-        balance(getRoot());
+        balance(findNode(data));
     }
     private int getNodeBalance(Node root) {
         if (root == null) {
@@ -39,42 +39,33 @@ public class AVLTree extends BinarySearchTree {
 
         return leftHeight-rightHeight;
     }
-    private void balance(Node root) {
-        // If node is leaf, exit function
-        if (root == null || (!root.hasLeftChild() && !root.hasRightChild())) {
+    private void balance(Node node) {
+        // If node is root, exit function
+        if (node == null) {
             return;
         }
-        int balance = getNodeBalance(root);
-        Node leftChild = root.getLeft();
-        Node rightChild = root.getRight();
+        Node nodeParent = node.getParent();
+        int balance = getNodeBalance(node);
 
-        if (balance >= 2) {
-            rotateRight(root);
-            balance(getRoot());
-        } else if (balance <= -2) {
-            rotateLeft(root);
-            balance(getRoot());
+        if (balance > 1) {
+            Node leftChild = node.getLeft();
+            if (getNodeBalance(leftChild) < 0) {
+                rotateLeft(leftChild);
+            }
+            rotateRight(node);
+        } else if (balance < -1) {
+            Node rightChild = node.getRight();
+            if (getNodeBalance(rightChild) > 0) {
+                rotateRight(rightChild);
+            }
+            rotateLeft(node);
         }
 
-        balance(leftChild);
-        balance(rightChild);
+        balance(nodeParent);
     }
-    public void rotateLeft(Node root) {
-        if (root == null) {
-            System.out.println("Root was null in rotateLeft");
-            return;
-        }
-        // ?
-        if (getNodeBalance(root.getRight()) > 0) {
-            rotateRight(root.getRight());
-        }
+    private void rotateLeft(Node root) {
         Node rootParent = root.getParent();
         Node rightChild = root.getRight();
-        if (rightChild == null) {
-            System.out.println("RightChild was null in rotateLeft");
-            return;
-        }
-
         Node rightChildLeftChild = root.getRight().getLeft();
 
         // Changing root's rightChild to point to root's parent and vice versa
@@ -93,26 +84,11 @@ public class AVLTree extends BinarySearchTree {
         // Root's rightChild previously had leftChild. Now we
         // set root's rightChild to be this lost child
         root.setRight(rightChildLeftChild);
-
-        // TODO: Dont forget to change the root if the root is rotated!
         setRoot((rootParent == null) ? root.getParent() : getRoot());
     }
-    public void rotateRight(Node root) {
-        if (root == null) {
-            System.out.println("Root was null in rotateRight");
-            return;
-        }
-        // ?
-        if (getNodeBalance(root.getLeft()) < 0) {
-            rotateLeft(root.getLeft());
-        }
+    private void rotateRight(Node root) {
         Node rootParent = root.getParent();
         Node leftChild = root.getLeft();
-        if (leftChild == null) {
-            System.out.println("LeftChild was null in rotateRight");
-            return;
-        }
-
         Node leftChildRightChild = root.getLeft().getRight();
 
         // Changing root's leftChild to point to root's parent and vice versa

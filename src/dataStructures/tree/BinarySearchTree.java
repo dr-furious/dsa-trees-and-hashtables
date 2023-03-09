@@ -64,8 +64,9 @@ public class BinarySearchTree {
     public void appendNode(int data) {
         appendNode(this.root, data);
     }
-    public void appendNode(Node node) {
+    public Node appendNode(Node node) {
         appendNode(this.root, node);
+        return node;
     }
 
     public void removeNode(int data) {

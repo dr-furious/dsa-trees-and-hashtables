@@ -3,6 +3,8 @@ package dataStructures.tree;
 public class Node {
 
     private int data;
+    private String content; // TODO: generate random string content
+
     private Node parent;
     private Node left;
     private Node right;
