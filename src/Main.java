@@ -7,9 +7,9 @@ public class Main {
     public static void main(String[] args) {
 
         AVLTree avlTree = new AVLTree();
-        int[] test1 = new int[1_00];
+        int[] test1 = new int[1_000_000];
         for (int i = 0; i < test1.length; i++) {
-            test1[i] = Tester.getRandomInt(0, 2_000_000_000);
+            test1[i] = Tester.getRandomInt(0, Integer.MAX_VALUE); // Integer.MAX_VALUE = 2_147_483_647
         }
 
         BinarySearchTree binarySearchTree = new BinarySearchTree();

@@ -39,8 +39,6 @@ public class BinarySearchTree {
                 root.setRight(new Node(data, root));
             }
         }
-
-        System.out.println("Called in bst");
     }
 
     private void appendNode(Node root, Node node) {

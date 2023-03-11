@@ -14,23 +14,7 @@ public class AVLTree extends BinarySearchTree {
 
     @Override
     public void appendNode(Node node, int data) {
-        if (node == null) {
-            setRoot(new Node(data));
-            return;
-        }
-        if (data < node.getData()) {
-            if (node.hasLeftChild()) {
-                appendNode(node.getLeft(), data);
-            } else {
-                node.setLeft(new Node(data, node));
-            }
-        } else if (data > node.getData()) {
-            if (node.hasRightChild()) {
-                appendNode(node.getRight(), data);
-            } else {
-                node.setRight(new Node(data, node));
-            }
-        }
+        super.appendNode(node, data);
 
         updateHeight(node);
         balance(node);
