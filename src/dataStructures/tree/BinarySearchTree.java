@@ -78,6 +78,7 @@ public class BinarySearchTree {
 
         // If removed node is leaf
         if (!wanted.hasLeftChild() && !wanted.hasRightChild()) {
+            // If it is the only node
             if (wantedParent == null) {
                 this.root = null;
                 return;
@@ -120,11 +121,7 @@ public class BinarySearchTree {
                 wantedParent.setRight(null);
                 appendNode(wantedParent, wanted.getLeft());
             }
-
         }
-
-
-
     }
 
     public Node findNode(int data) {

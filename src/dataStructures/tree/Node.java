@@ -61,6 +61,14 @@ public class Node {
         this.height = height;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public Node getParent() {
         return parent;
     }
@@ -117,5 +125,13 @@ public class Node {
         int rightHeight = computeHeight(root.getRight());
 
         return ((leftHeight > rightHeight) ? leftHeight : rightHeight) + 1;
+    }
+
+    public static void transmit(Node location, Node target) {
+        if (location == null || target == null) {
+            return;
+        }
+        target.setData(location.getData());
+        target.setContent(location.getContent());
     }
 }

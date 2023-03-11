@@ -19,10 +19,68 @@ public class AVLTree extends BinarySearchTree {
         updateHeight(node);
         balance(node);
     }
-    @Override
     public void removeNode(int data) {
-        super.removeNode(data);
-        balance(findNode(data));
+        removeNode(getRoot(), data);
+    }
+
+    private void removeNode(Node node, int data) {
+        if (node == null) {
+            return;
+        }
+        if (data < node.getData()) {
+            removeNode(node.getLeft(), data);
+        } else if (data > node.getData()) {
+            removeNode(node.getRight(), data);
+        } else { // Node to be removed is found
+            // If the node is leaf
+            if (!node.hasLeftChild() && !node.hasRightChild()) {
+                removeLeaf(node);
+            } else if (node.hasLeftChild() && node.hasRightChild()) {
+                Node nextInOrder = findNextInOrder(node.getRight());
+                Node.transmit(nextInOrder, node);
+                removeNode(node.getRight(), nextInOrder.getData());
+            } else {
+                Node child;
+                if (node.hasLeftChild()) {
+                    child = node.getLeft();
+                } else {
+                    child = node.getRight();
+                }
+                Node.transmit(child, node);
+                removeNode(child, child.getData());
+            }
+        }
+
+        updateHeight(node);
+        balance(node);
+    }
+
+    private void removeLeaf(Node leaf) {
+        if (leaf == null) {
+            return;
+        }
+        Node nodeParent = leaf.getParent();
+        // If node is the single node in the tree
+        if (nodeParent == null) {
+            setRoot(null);
+            return;
+        }
+        if (nodeParent.getLeft() == leaf) {
+            nodeParent.setLeft(null);
+        }
+        if (nodeParent.getRight() == leaf) {
+            nodeParent.setRight(null);
+        }
+    }
+
+    private Node findNextInOrder(Node root) {
+        if (root == null) {
+            return null;
+        }
+        while (root.hasLeftChild()) {
+            root = root.getLeft();
+        }
+        return root;
     }
 
     private void updateHeight(Node node) {
