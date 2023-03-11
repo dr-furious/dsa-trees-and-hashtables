@@ -21,7 +21,7 @@ public class BinarySearchTree {
     }
 
     // Appends Node to the leaf of the tree according to the BST property PRIVATE!
-    private void appendNode(Node root, int data) {
+    public void appendNode(Node root, int data) {
         if (this.root == null) {
             this.root = new Node(data);
             return;
@@ -39,6 +39,8 @@ public class BinarySearchTree {
                 root.setRight(new Node(data, root));
             }
         }
+
+        System.out.println("Called in bst");
     }
 
     private void appendNode(Node root, Node node) {
@@ -172,7 +174,7 @@ public class BinarySearchTree {
             System.out.println("<null>");
             return;
         }
-        int treeHeight = this.root.getHeight();
+        int treeHeight = this.root.computeHeight();
 
         for (int i = 1; i < treeHeight+1; i++) {
             System.out.print("Level " + (i-1) + ": ");

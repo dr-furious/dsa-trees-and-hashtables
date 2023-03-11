@@ -4,6 +4,7 @@ public class Node {
 
     private int data;
     private String content; // TODO: generate random string content
+    private int height;
 
     private Node parent;
     private Node left;
@@ -14,6 +15,7 @@ public class Node {
         this.parent = null;
         this.left = null;
         this.right = null;
+        this.height = 1;
     }
 
     public Node (int data, Node parent) {
@@ -51,6 +53,14 @@ public class Node {
         this.data = data;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public Node getParent() {
         return parent;
     }
@@ -59,8 +69,8 @@ public class Node {
         this.parent = parent;
     }
 
-    public int getHeight() {
-        return getHeight(this);
+    public int computeHeight() {
+        return computeHeight(this);
     }
 
     public boolean hasParent() {
@@ -81,6 +91,7 @@ public class Node {
                 "> P:" + ((parent == null) ? "null" : parent.getData()) +
                 " L:" + ((left == null) ? "null" : left.getData()) +
                 " R:" + ((right == null) ? "null" : right.getData()) +
+                " h:" + height +
                 "] ";
         System.out.printf(s);
         return s;
@@ -97,13 +108,13 @@ public class Node {
         return clone;
     }
 
-    public static int getHeight(Node root) {
+    public static int computeHeight(Node root) {
 
         if (root == null) {
             return 0;
         }
-        int leftHeight = getHeight(root.getLeft());
-        int rightHeight = getHeight(root.getRight());
+        int leftHeight = computeHeight(root.getLeft());
+        int rightHeight = computeHeight(root.getRight());
 
         return ((leftHeight > rightHeight) ? leftHeight : rightHeight) + 1;
     }

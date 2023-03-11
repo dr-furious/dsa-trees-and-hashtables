@@ -1,7 +1,5 @@
 package dataStructures.tree;
 
-import com.sun.source.tree.Tree;
-
 public class AVLTree extends BinarySearchTree {
 
     public AVLTree() {
@@ -15,14 +13,47 @@ public class AVLTree extends BinarySearchTree {
     }
 
     @Override
-    public void appendNode(int data) {
-        Node node = appendNode(new Node(data));
-        balance(node.getParent());
+    public void appendNode(Node node, int data) {
+        if (node == null) {
+            setRoot(new Node(data));
+            return;
+        }
+        if (data < node.getData()) {
+            if (node.hasLeftChild()) {
+                appendNode(node.getLeft(), data);
+            } else {
+                node.setLeft(new Node(data, node));
+            }
+        } else if (data > node.getData()) {
+            if (node.hasRightChild()) {
+                appendNode(node.getRight(), data);
+            } else {
+                node.setRight(new Node(data, node));
+            }
+        }
+
+        updateHeight(node);
+        balance(node);
     }
     @Override
     public void removeNode(int data) {
         super.removeNode(data);
         balance(findNode(data));
+    }
+
+    private void updateHeight(Node node) {
+        if (node == null){
+            return;
+        }
+        node.setHeight(1 + Math.max(getNodeHeight(node.getLeft()), getNodeHeight(node.getRight())));
+    }
+
+    private int getNodeHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return node.getHeight();
     }
     private int getNodeBalance(Node root) {
         if (root == null) {
@@ -30,6 +61,7 @@ public class AVLTree extends BinarySearchTree {
         }
         int leftHeight = 0;
         int rightHeight = 0;
+
         if (root.hasLeftChild()) {
             leftHeight = root.getLeft().getHeight();
         }
@@ -44,7 +76,6 @@ public class AVLTree extends BinarySearchTree {
         if (node == null) {
             return;
         }
-        Node nodeParent = node.getParent();
         int balance = getNodeBalance(node);
 
         if (balance > 1) {
@@ -60,8 +91,6 @@ public class AVLTree extends BinarySearchTree {
             }
             rotateLeft(node);
         }
-
-        balance(nodeParent);
     }
     private void rotateLeft(Node root) {
         Node rootParent = root.getParent();
@@ -85,6 +114,9 @@ public class AVLTree extends BinarySearchTree {
         // set root's rightChild to be this lost child
         root.setRight(rightChildLeftChild);
         setRoot((rootParent == null) ? root.getParent() : getRoot());
+
+        root.setHeight(1+Math.max(getNodeHeight(root.getLeft()), getNodeHeight(root.getRight())));
+        rightChild.setHeight(1+Math.max(getNodeHeight(rightChild.getLeft()), getNodeHeight(rightChild.getRight())));
     }
     private void rotateRight(Node root) {
         Node rootParent = root.getParent();
@@ -107,7 +139,9 @@ public class AVLTree extends BinarySearchTree {
         // Root's leftChild previously had rightChild. Now we
         // set root's leftChild to be this lost child
         root.setLeft(leftChildRightChild);
-
         setRoot((rootParent == null) ? root.getParent() : getRoot());
+
+        root.setHeight(1+Math.max(getNodeHeight(root.getLeft()), getNodeHeight(root.getRight())));
+        leftChild.setHeight(1+Math.max(getNodeHeight(leftChild.getLeft()), getNodeHeight(leftChild.getRight())));
     }
 }
