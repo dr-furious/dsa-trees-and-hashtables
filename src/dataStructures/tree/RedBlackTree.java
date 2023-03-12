@@ -1,5 +1,7 @@
 package dataStructures.tree;
 
+import dataStructures.*;
+
 public class RedBlackTree extends BinarySearchTree {
 
     public RedBlackTree() {

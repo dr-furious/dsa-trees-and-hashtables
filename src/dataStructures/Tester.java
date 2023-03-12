@@ -1,3 +1,5 @@
+package dataStructures;
+
 public class Tester {
 
     public static int getRandomInt(int min, int max) {

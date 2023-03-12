@@ -1,5 +1,7 @@
 package dataStructures.tree;
 
+import dataStructures.*;
+
 public class BinarySearchTree {
     private Node root;
 
@@ -20,7 +22,7 @@ public class BinarySearchTree {
          this.root = root;
     }
 
-    // Appends Node to the leaf of the tree according to the BST property PRIVATE!
+    // Appends dataStructures.Node to the leaf of the tree according to the BST property PRIVATE!
     public void appendNode(Node root, int data) {
         if (this.root == null) {
             this.root = new Node(data);

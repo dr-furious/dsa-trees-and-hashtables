@@ -1,9 +1,9 @@
-package dataStructures.tree;
+package dataStructures;
 
 public class Node {
 
     private int data;
-    private String content; // TODO: generate random string content
+    private String content;
     private int height;
 
     private Node parent;
@@ -12,10 +12,11 @@ public class Node {
 
     public Node(int data) {
         this.data = data;
+        this.content = generateRandomContent();
+        this.height = 1;
         this.parent = null;
         this.left = null;
         this.right = null;
-        this.height = 1;
     }
 
     public Node (int data, Node parent) {
@@ -95,11 +96,12 @@ public class Node {
 
     @Override
     public String toString() {
-        String s = "[<" + this.getData() +
+        String s = "[<" + data +
                 "> P:" + ((parent == null) ? "null" : parent.getData()) +
                 " L:" + ((left == null) ? "null" : left.getData()) +
                 " R:" + ((right == null) ? "null" : right.getData()) +
                 " h:" + height +
+                " c:" + content +
                 "] ";
         System.out.printf(s);
         return s;
@@ -133,5 +135,16 @@ public class Node {
         }
         target.setData(location.getData());
         target.setContent(location.getContent());
+    }
+
+    private String generateRandomContent() {
+        int length = Tester.getRandomInt(2,11);
+        String random = "";
+        for (int i = 0; i < length; i++) {
+            int intChar = Tester.getRandomInt(97, 123); // generate ascii value of one character
+            random += Character.toString((char) intChar); // convert character from ascii code to string
+        }
+
+        return random;
     }
 }
