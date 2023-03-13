@@ -15,30 +15,52 @@ public class SplayTree extends BinarySearchTree {
         super(rootValue);
     }
 
-    @Override
-    public Node appendNode(Node node, int data) {
-        Node child =  super.appendNode(node, data);
-
+    public void appendNode(int data) {
+        Node child = super.appendNode(getRoot(), data);
         splay(child);
-        return child;
     }
-    private void findNode(Node root, int data) {
-        if (root == null) {
-            return ;
-        }
-
-        if (data < root.getData()) {
-            findNode(root.getLeft(), data);
-        } else if (data > root.getData()) {
-            findNode(root.getRight(), data);
-        }
-
-        splay(root);
-    }
-
     public Node findNode(int data) {
-        findNode(getRoot(), data);
+        Node wanted = super.findNode(data);
+        splay(wanted);
         return getRoot();
+    }
+    public void removeNode(int data) {
+        findNode(data);
+        Node root = getRoot();
+        if (root == null || root.getData() != data) {
+            return;
+        }
+        if (!root.hasLeftChild() && !root.hasRightChild()) {
+            setRoot(null);
+            return;
+        }
+        if (!root.hasLeftChild()) {
+            Node child = root.getRight();
+            child.setParent(null);
+            setRoot(child);
+            return;
+        }
+        if (!root.hasRightChild()) {
+            Node child = root.getLeft();
+            child.setParent(null);
+            setRoot(child);
+            return;
+        }
+
+        Node left = getRoot().getLeft();
+        Node right = getRoot().getRight();
+
+        Node leftRoot = findPreviousInOrder(left);
+
+        splay(leftRoot);
+        leftRoot.setRight(right);
+    }
+    private Node findPreviousInOrder(Node node) {
+        while (node.getRight() != null) {
+            node = node.getRight();
+        }
+
+        return node;
     }
     private void splay(Node node) {
         if (node == null || node.getParent() == null) {
@@ -77,6 +99,7 @@ public class SplayTree extends BinarySearchTree {
                     zagRotate(parent);
                 }
             }
+            splay(node);
         }
     }
     private void zagRotate(Node root) {
