@@ -23,24 +23,28 @@ public class BinarySearchTree {
     }
 
     // Appends dataStructures.Node to the leaf of the tree according to the BST property PRIVATE!
-    public void appendNode(Node root, int data) {
+    public Node appendNode(Node root, int data) {
         if (this.root == null) {
             this.root = new Node(data);
-            return;
+            return this.root;
         }
+
         if (data < root.getData()) {
             if (root.hasLeftChild()) {
-                appendNode(root.getLeft(), data);
+                return appendNode(root.getLeft(), data);
             } else {
                 root.setLeft(new Node(data, root));
+                return root.getLeft();
             }
         } else if (data > root.getData()) {
             if (root.hasRightChild()) {
-                appendNode(root.getRight(), data);
+                return appendNode(root.getRight(), data);
             } else {
                 root.setRight(new Node(data, root));
+                return root.getRight();
             }
         }
+        return null;
     }
 
     private void appendNode(Node root, Node node) {

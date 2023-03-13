@@ -15,16 +15,16 @@ public class AVLTree extends BinarySearchTree {
     }
 
     @Override
-    public void appendNode(Node node, int data) {
+    public Node appendNode(Node node, int data) {
         super.appendNode(node, data);
 
         updateHeight(node);
         balance(node);
+        return node;
     }
     public void removeNode(int data) {
         removeNode(getRoot(), data);
     }
-
     private void removeNode(Node node, int data) {
         if (node == null) {
             return;
@@ -56,7 +56,6 @@ public class AVLTree extends BinarySearchTree {
         updateHeight(node);
         balance(node);
     }
-
     private void removeLeaf(Node leaf) {
         if (leaf == null) {
             return;
@@ -74,7 +73,6 @@ public class AVLTree extends BinarySearchTree {
             nodeParent.setRight(null);
         }
     }
-
     private Node findNextInOrder(Node root) {
         if (root == null) {
             return null;
@@ -84,14 +82,12 @@ public class AVLTree extends BinarySearchTree {
         }
         return root;
     }
-
     private void updateHeight(Node node) {
         if (node == null){
             return;
         }
         node.setHeight(1 + Math.max(getNodeHeight(node.getLeft()), getNodeHeight(node.getRight())));
     }
-
     private int getNodeHeight(Node node) {
         if (node == null) {
             return 0;
