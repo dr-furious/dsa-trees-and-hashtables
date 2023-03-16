@@ -1,15 +1,14 @@
 package dataStructures;
 
 import dataStructures.tree.AVLTree;
-import dataStructures.tree.SplayTree;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
 
-        SplayTree tree = new SplayTree();
-        // AVLTree tree = new AVLTree();
+        // SplayTree tree = new SplayTree();
+        AVLTree tree = new AVLTree();
 
         int[] test = new int[1_000_000];
         int[] testSorted = new int[10_000_000];
