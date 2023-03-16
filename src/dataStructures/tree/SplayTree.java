@@ -1,5 +1,7 @@
 package dataStructures.tree;
 
+import dataStructures.Node;
+
 public class SplayTree extends BinarySearchTree {
 
     public SplayTree() {

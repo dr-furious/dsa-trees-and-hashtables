@@ -1,6 +1,4 @@
-package dataStructures.tree;
-
-import dataStructures.Tester;
+package dataStructures;
 
 public class Node {
 
