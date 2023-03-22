@@ -3,14 +3,17 @@ package dataStructures.hashTable;
 import dataStructures.Tester;
 
 public class Node {
+
     private String key;
     private int data;
     private Node next;
+    private boolean deleted;
 
     public Node(String data) {
         this.key = data;
         this.data = Tester.getRandomInt(0, Integer.MAX_VALUE);
         this.next = null;
+        this.deleted = false;
     }
 
     public String getKey() {
@@ -35,11 +38,20 @@ public class Node {
         return (next != null);
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         String s = "[<" + key +
                 "> N:" + ((next == null) ? "null" : next.getKey()) +
                 " c:" + data +
+                " d:" + deleted +
                 "] ";
         System.out.printf(s);
         return s;

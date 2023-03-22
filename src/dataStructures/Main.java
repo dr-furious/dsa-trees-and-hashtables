@@ -2,6 +2,7 @@ package dataStructures;
 
 import dataStructures.hashTable.ChainedHashTable;
 import dataStructures.hashTable.HashTable;
+import dataStructures.hashTable.LinearProbingHashTable;
 import dataStructures.tree.AVLTree;
 
 import java.util.Arrays;
@@ -46,8 +47,9 @@ public class Main {
 
         */
 
-        HashTable hashTable = new ChainedHashTable();
-        String[] stringTest = new String[10_000_000];
+        HashTable hashTable = new LinearProbingHashTable();
+        // HashTable hashTable = new ChainedHashTable();
+        String[] stringTest = new String[1_000_000];
         for (int i = 0; i < stringTest.length; i++) {
             stringTest[i] = Tester.getRandomString(2, 8, 97, 123);
         }
@@ -60,6 +62,8 @@ public class Main {
         hashTable.print();
         System.out.println("Hashtable size: " + hashTable.getSize() + ", Hashtable noe: " + hashTable.getNumberOfElements());
         System.out.println("Construction: " + (stop-start) + " milliseconds -> " + toSeconds(stop-start) + " seconds");
+
+
 
         long startDelete = System.currentTimeMillis();
         System.out.println();
