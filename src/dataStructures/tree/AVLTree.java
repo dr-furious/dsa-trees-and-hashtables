@@ -1,7 +1,5 @@
 package dataStructures.tree;
 
-import dataStructures.Node;
-
 public class AVLTree extends BinarySearchTree {
 
     public AVLTree() {
@@ -33,7 +31,7 @@ public class AVLTree extends BinarySearchTree {
             removeNode(node.getLeft(), data);
         } else if (data > node.getData()) {
             removeNode(node.getRight(), data);
-        } else { // dataStructures.Node to be removed is found
+        } else { // dataStructures.tree.Node to be removed is found
             // If the node is leaf
             if (!node.hasLeftChild() && !node.hasRightChild()) {
                 removeLeaf(node);

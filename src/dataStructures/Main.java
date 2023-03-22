@@ -1,11 +1,14 @@
 package dataStructures;
 
+import dataStructures.hashTable.ChainedHashTable;
+import dataStructures.hashTable.HashTable;
 import dataStructures.tree.AVLTree;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        /*
 
         // SplayTree tree = new SplayTree();
         AVLTree tree = new AVLTree();
@@ -40,9 +43,41 @@ public class Main {
 
         tree.print();
         System.out.println("Deletion: " + (stop1-start1) + " milliseconds -> " + toSeconds(stop1-start1) + " seconds");
+
+        */
+
+        HashTable hashTable = new ChainedHashTable();
+        String[] stringTest = new String[10_000_000];
+        for (int i = 0; i < stringTest.length; i++) {
+            stringTest[i] = Tester.getRandomString(2, 8, 97, 123);
+        }
+
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < stringTest.length; i++) {
+            hashTable.add(stringTest[i]);
+        }
+        long stop = System.currentTimeMillis();
+        hashTable.print();
+        System.out.println("Hashtable size: " + hashTable.getSize() + ", Hashtable noe: " + hashTable.getNumberOfElements());
+        System.out.println("Construction: " + (stop-start) + " milliseconds -> " + toSeconds(stop-start) + " seconds");
+
+        long startDelete = System.currentTimeMillis();
+        System.out.println();
+        for (int i = 0; i < stringTest.length; i++) {
+            hashTable.remove(stringTest[i]);
+        }
+        long stopDelete = System.currentTimeMillis();
+        hashTable.print();
+
+        System.out.println("Hashtable size: " + hashTable.getSize() + ", Hashtable noe: " + hashTable.getNumberOfElements());
+        System.out.println("Deletion: " + (stopDelete-startDelete) + " milliseconds -> " + toSeconds(stopDelete-startDelete) + " seconds");
+        System.out.println();
     }
 
     public static double toSeconds(long milliseconds) {
         return milliseconds/1000.0;
     }
+
+
+
 }
