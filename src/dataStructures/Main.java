@@ -1,11 +1,10 @@
 package dataStructures;
 
+import dataStructures.Test.Operations;
+import dataStructures.Test.Tester;
 import dataStructures.hashTable.ChainedHashTable;
 import dataStructures.hashTable.HashTable;
 import dataStructures.hashTable.LinearProbingHashTable;
-import dataStructures.tree.AVLTree;
-
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,11 +46,12 @@ public class Main {
 
         */
 
+        /*
         HashTable hashTable = new LinearProbingHashTable();
         // HashTable hashTable = new ChainedHashTable();
         String[] stringTest = new String[1_000_000];
         for (int i = 0; i < stringTest.length; i++) {
-            stringTest[i] = Tester.getRandomString(2, 8, 97, 123);
+            stringTest[i] = Tester.getRandomString(10, 20, 97, 123);
         }
 
         long start = System.currentTimeMillis();
@@ -76,6 +76,12 @@ public class Main {
         System.out.println("Hashtable size: " + hashTable.getSize() + ", Hashtable noe: " + hashTable.getNumberOfElements());
         System.out.println("Deletion: " + (stopDelete-startDelete) + " milliseconds -> " + toSeconds(stopDelete-startDelete) + " seconds");
         System.out.println();
+
+         */
+
+        Tester tester = new Tester();
+        tester.testOperationInHashTable(new LinearProbingHashTable(), Operations.CREATE, 10_000, 10, 100);
+        // tester.dataToCSV("testOne");
     }
 
     public static double toSeconds(long milliseconds) {

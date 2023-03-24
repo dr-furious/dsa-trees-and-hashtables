@@ -131,7 +131,6 @@ public class BinarySearchTree {
     public Node findNode(int data) {
         return findNode(this.root, data);
     }
-
     private Node findNode(Node root, int data) {
         if (root == null) {
             return null;
@@ -147,7 +146,6 @@ public class BinarySearchTree {
             return findNode(root.getRight(), data);
         }
     }
-
     // Prints given level of the tree from specified node
     private void printLevel(Node root, int level) {
         if (root == null) {

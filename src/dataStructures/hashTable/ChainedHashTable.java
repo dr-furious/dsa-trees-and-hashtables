@@ -65,6 +65,9 @@ public class ChainedHashTable extends HashTable {
 
     @Override
     public void remove(String key) {
+        if (key == null) {
+            return;
+        }
         int index = hash(key);
         Node ghost = getData(index);
 
@@ -114,6 +117,9 @@ public class ChainedHashTable extends HashTable {
 
     @Override
     public Node find(String key) {
+        if (key == null) {
+            return null;
+        }
         int index = hash(key);
         Node ghost = getData(index);
 
