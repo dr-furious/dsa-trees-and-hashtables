@@ -54,7 +54,7 @@ public class ChainedHashTable extends HashTable {
         // If table is filled on more than 75%
         if (getFillRatio() >= 0.75) {
             Node[] denseData = getData();
-            Node[] newData = new Node[getSize()*2]; // Get the next prime number greater than the current size
+            Node[] newData = new Node[getSize()*2]; // Double the size of the table
             setData(newData);
             setSize(newData.length);
             for (Node d:denseData) {
@@ -106,7 +106,7 @@ public class ChainedHashTable extends HashTable {
         // If table is filled on less than 25%
         if (getFillRatio() < 0.25 && getSize() != getINITIAL_SIZE()) {
             Node[] sparseData = getData();
-            Node[] newData = new Node[getSize()/2]; // Get the next prime number greater than the current size
+            Node[] newData = new Node[getSize()/2]; // Split the size of the table
             setData(newData);
             setSize(newData.length);
             for (Node d:sparseData) {

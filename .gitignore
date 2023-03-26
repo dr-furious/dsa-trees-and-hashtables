@@ -1,2 +1,3 @@
 # ignore following files and folders
 .idea/
+.Rproj.user

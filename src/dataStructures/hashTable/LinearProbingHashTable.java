@@ -25,7 +25,7 @@ public class LinearProbingHashTable extends HashTable {
 
         incrementNumberOfElements();
 
-        // If table is filled on less than 25%
+        // If table is filled on more than 75%
         if (getFillRatio() >= 0.75) {
             Node[] denseData = getData();
             Node[] newData = new Node[getSize()*2]; // double the size of the table
@@ -55,6 +55,7 @@ public class LinearProbingHashTable extends HashTable {
 
     private int findNextSlot(int startIndex, String key) {
         Node check;
+        int size = getSize();
         while ((check = getData(startIndex)) != null) {
             if (check.isDeleted()) {
                 return startIndex;
@@ -62,7 +63,7 @@ public class LinearProbingHashTable extends HashTable {
             if (key.equals(check.getKey())) {
                 return -1;
             }
-            startIndex = (startIndex + 1) % getSize();
+            startIndex = (startIndex + 1) % size;
         }
         return startIndex;
     }

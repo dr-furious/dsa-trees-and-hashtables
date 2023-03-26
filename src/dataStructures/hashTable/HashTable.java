@@ -2,7 +2,7 @@ package dataStructures.hashTable;
 
 public abstract class HashTable {
     private Node[] data;
-    private final int INITIAL_SIZE = 4;
+    private final int INITIAL_SIZE = 8;
     private int size;
     private int numberOfElements;
 

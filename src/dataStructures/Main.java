@@ -5,6 +5,10 @@ import dataStructures.Test.Tester;
 import dataStructures.hashTable.ChainedHashTable;
 import dataStructures.hashTable.HashTable;
 import dataStructures.hashTable.LinearProbingHashTable;
+import dataStructures.hashTable.Node;
+import dataStructures.tree.AVLTree;
+import dataStructures.tree.BinarySearchTree;
+import dataStructures.tree.SplayTree;
 
 public class Main {
     public static void main(String[] args) {
@@ -78,10 +82,81 @@ public class Main {
         System.out.println();
 
          */
-
         Tester tester = new Tester();
-        tester.testOperationInHashTable(new LinearProbingHashTable(), Operations.CREATE, 10_000, 10, 100);
-        // tester.dataToCSV("testOne");
+
+        // 5, 7
+        int testNumber = 3;
+
+        // 6, 8
+        int endTestNum = 4;
+
+        //
+        int startSize = 0;
+
+        for (int i = testNumber; i<=endTestNum;i++) {
+            System.out.println("Testing AVL started...");
+            tester.testAllOperationsInBinarySearchTree(new AVLTree(), 10_000,100, 100, true);
+            System.out.println("Writing AVL data...");
+            tester.dataToCSV("AVL_tree_" + testNumber, true);
+            System.out.println("AVL done");
+
+            System.out.println("Testing Splay started...");
+            tester.testAllOperationsInBinarySearchTree(new SplayTree(), 10_000,100, 100, true);
+            System.out.println("Writing Splay data...");
+            tester.dataToCSV("Splay _tree_" + testNumber, true);
+            System.out.println("Splay done");
+
+            System.out.println("Testing LP started...");
+            tester.testAllOperationsInHashTable(new LinearProbingHashTable(), 10_000,100, 100, true);
+            System.out.println("Writing LP data...");
+            tester.dataToCSV("Linear_Probing_" + testNumber, true);
+            System.out.println("LP done");
+
+            System.out.println("Testing CH started...");
+            tester.testAllOperationsInHashTable(new ChainedHashTable(),10_000,100, 100, true);
+            System.out.println("Writing CH data...");
+            tester.dataToCSV("Chaining_" + testNumber, true);
+            System.out.println("CH done");
+            System.out.println("Testing done");
+            testNumber++;
+        }
+/*
+        tester.testOperationInHashTable(new LinearProbingHashTable(), Operations.CREATE, 10_000, 10, 10, true);
+        tester.testOperationInHashTable(new LinearProbingHashTable(), Operations.DELETE, 10_000, 10, 10, true);
+        tester.testOperationInHashTable(new LinearProbingHashTable(), Operations.ADD, 10_000, 10, 10, true);
+        tester.testOperationInHashTable(new LinearProbingHashTable(), Operations.REMOVE, 10_000, 10, 10, true);
+        tester.testOperationInHashTable(new LinearProbingHashTable(), Operations.FIND, 10_000, 10, 10, true);
+*/
+
+        /*HashTable hashTable = new ChainedHashTable();
+        String[] stringArr = new String[10_000];
+        SplayTree binarySearchTree = new SplayTree();
+        int[] intArr = new int[10_000];
+
+        for (int i = 0; i<stringArr.length; i++) {
+            stringArr[i] = Tester.getRandomString(10, 20, 97, 123);
+            hashTable.add(stringArr[i]);
+
+            intArr[i] = Tester.getRandomInt(Integer.MIN_VALUE, Integer.MAX_VALUE);
+            binarySearchTree.appendNode(intArr[i]);
+        }
+
+        long start;
+        long stop;
+
+        start = System.nanoTime();
+        Node node = hashTable.find(stringArr[Tester.getRandomInt(0, stringArr.length-1)]);
+        stop = System.nanoTime();
+        System.out.println("Hashtable find: " + (stop-start));
+        node.toString();
+
+        System.out.println();
+
+        start = System.nanoTime();
+        dataStructures.tree.Node treeNode = binarySearchTree.findNode(intArr[Tester.getRandomInt(0, intArr.length-1)]);
+        stop = System.nanoTime();
+        System.out.println("Binary Search Tree find: " + (stop-start));
+        treeNode.toString();*/
     }
 
     public static double toSeconds(long milliseconds) {
