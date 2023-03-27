@@ -50,7 +50,6 @@ public class AVLTree extends BinarySearchTree {
                 removeNode(child, child.getData());
             }
         }
-
         updateHeight(node);
         balance(node);
     }

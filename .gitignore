@@ -1,3 +1,5 @@
 # ignore following files and folders
 .idea/
 .Rproj.user
+*.csv
+/tests

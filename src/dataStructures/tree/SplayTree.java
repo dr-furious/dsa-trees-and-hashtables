@@ -64,7 +64,6 @@ public class SplayTree extends BinarySearchTree {
         if (node == null || node.getParent() == null) {
             return;
         }
-
         Node parent = node.getParent();
         Node grandParent = parent.getParent();
         if (grandParent == null) {
@@ -77,22 +76,18 @@ public class SplayTree extends BinarySearchTree {
             }
         } else {
             if (grandParent.getLeft() == parent) {
-                if (parent.getLeft() == node) {
-                    // Zig-Zig rotation gp -> p
+                if (parent.getLeft() == node) { // Zig-Zig rotation gp -> p
                     zigRotate(grandParent);
                     zigRotate(parent);
-                } else {
-                    // Zag-Zig rotation p -> gp
+                } else { // Zag-Zig rotation p -> gp
                     zagRotate(parent);
                     zigRotate(grandParent);
                 }
             } else {
-                if (parent.getLeft() == node) {
-                    // Zig-Zag rotation p -> gp
+                if (parent.getLeft() == node) { // Zig-Zag rotation p -> gp
                     zigRotate(parent);
                     zagRotate(grandParent);
-                } else {
-                    // Zag-Zag rotation gp -> p
+                } else { // Zag-Zag rotation gp -> p
                     zagRotate(grandParent);
                     zagRotate(parent);
                 }

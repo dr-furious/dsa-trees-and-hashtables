@@ -20,7 +20,7 @@ public class BinarySearchTree {
          this.root = root;
     }
 
-    // Appends dataStructures.tree.Node to the leaf of the tree according to the BST property PRIVATE!
+    // Appends dataStructures.tree.Node to the leaf of the tree according to the BST property
     public Node appendNode(Node root, int data) {
         if (this.root == null) {
             this.root = new Node(data);
@@ -44,6 +44,9 @@ public class BinarySearchTree {
         }
         return null;
     }
+    public void appendNode(int data) {
+        appendNode(this.root, data);
+    }
 
     private void appendNode(Node root, Node node) {
         if (this.root == null) {
@@ -63,10 +66,6 @@ public class BinarySearchTree {
                 root.setRight(node);
             }
         }
-    }
-
-    public void appendNode(int data) {
-        appendNode(this.root, data);
     }
     public Node appendNode(Node node) {
         appendNode(this.root, node);

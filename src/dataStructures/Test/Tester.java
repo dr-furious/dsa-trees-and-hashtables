@@ -15,6 +15,7 @@ public class Tester {
     private List<Integer> sizeList;
     private List<Double> creationList;
     private List<Double> deletionList;
+    private List<Double> findAllList;
     private List<Double> additionList;
     private List<Double> removalList;
     private List<Double> findList;
@@ -22,6 +23,7 @@ public class Tester {
     public Tester() {
         this.sizeList = new ArrayList<>();
         this.creationList = new ArrayList<>();
+        this.findAllList = new ArrayList<>();
         this.deletionList = new ArrayList<>();
         this.additionList = new ArrayList<>();
         this.removalList = new ArrayList<>();
@@ -63,6 +65,26 @@ public class Tester {
                             tree.removeNode(n);
                         }
                         stop = System.nanoTime();
+                    }
+                    case FIND_DALL -> {
+                        if (j==0) {
+                            for (int n : test) {
+                                tree.appendNode(n);
+                            }
+                        }
+
+                        // Measuring search operation
+                        start = System.nanoTime();
+                        for (int n : test) {
+                            tree.findNode(n);
+                        }
+                        stop = System.nanoTime();
+
+                        if (j== averageFrom-1){
+                            for (int n : test) {
+                                tree.removeNode(n);
+                            }
+                        }
                     }
                     case ADD -> {
                         if (j==0) {
@@ -141,6 +163,7 @@ public class Tester {
     public void testAllOperationsInBinarySearchTree(BinarySearchTree tree, int size,int span, int numberOfTests, int averageFrom, boolean printFlag) {
         testOperationInBinarySearchTree(tree, Operations.CREATE,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.DELETE,size, span, numberOfTests, averageFrom, printFlag);
+        testOperationInBinarySearchTree(tree, Operations.FIND_DALL,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.ADD,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.REMOVE,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.FIND,size, span, numberOfTests, averageFrom, printFlag);
@@ -183,6 +206,26 @@ public class Tester {
                             table.remove(s);
                         }
                         stop = System.nanoTime();
+                    }
+                    case FIND_DALL -> {
+                        if (j==0) {
+                            for (String s : test) {
+                                table.add(s);
+                            }
+                        }
+
+                        // Measuring search operation
+                        start = System.nanoTime();
+                        for (String s : test) {
+                            table.find(s);
+                        }
+                        stop = System.nanoTime();
+
+                        if (j== averageFrom-1){
+                            for (String s : test) {
+                                table.remove(s);
+                            }
+                        }
                     }
                     case ADD -> {
                         if (j==0) {
@@ -261,6 +304,7 @@ public class Tester {
     public void testAllOperationsInHashTable(HashTable table,int size, int span, int numberOfTests, int averageFrom, boolean printFlag) {
         testOperationInHashTable(table, Operations.CREATE,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.DELETE,size, span, numberOfTests, averageFrom, printFlag);
+        testOperationInHashTable(table, Operations.FIND_DALL,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.ADD,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.REMOVE,size, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.FIND,size, span, numberOfTests, averageFrom, printFlag);
@@ -305,6 +349,26 @@ public class Tester {
                             tree.removeNode(n);
                         }
                         stop = System.nanoTime();
+                    }
+                    case FIND_DALL -> {
+                        if (j==0) {
+                            for (int n : test) {
+                                tree.appendNode(n);
+                            }
+                        }
+
+                        // Measuring search operation
+                        start = System.nanoTime();
+                        for (int n : test) {
+                            tree.findNode(n);
+                        }
+                        stop = System.nanoTime();
+
+                        if (j== averageFrom-1){
+                            for (int n : test) {
+                                tree.removeNode(n);
+                            }
+                        }
                     }
                     case ADD -> {
                         if (j==0) {
@@ -383,6 +447,7 @@ public class Tester {
     public void testAllOperationsInBinarySearchTree(BinarySearchTree tree, int span, int numberOfTests, int averageFrom, boolean printFlag) {
         testOperationInBinarySearchTree(tree, Operations.CREATE, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.DELETE, span, numberOfTests, averageFrom, printFlag);
+        testOperationInBinarySearchTree(tree, Operations.FIND_DALL, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.ADD, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.REMOVE, span, numberOfTests, averageFrom, printFlag);
         testOperationInBinarySearchTree(tree, Operations.FIND, span, numberOfTests, averageFrom, printFlag);
@@ -426,6 +491,26 @@ public class Tester {
                             table.remove(test[k]);
                         }
                         stop = System.nanoTime();
+                    }
+                    case FIND_DALL -> {
+                        if (j==0) {
+                            for (String s : test) {
+                                table.add(s);
+                            }
+                        }
+
+                        // Measuring search operation
+                        start = System.nanoTime();
+                        for (String s : test) {
+                            table.find(s);
+                        }
+                        stop = System.nanoTime();
+
+                        if (j== averageFrom-1){
+                            for (String s : test) {
+                                table.remove(s);
+                            }
+                        }
                     }
                     case ADD -> {
                         if (j==0) {
@@ -504,6 +589,7 @@ public class Tester {
     public void testAllOperationsInHashTable(HashTable table, int span, int numberOfTests, int averageFrom, boolean printFlag) {
         testOperationInHashTable(table, Operations.CREATE, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.DELETE, span, numberOfTests, averageFrom, printFlag);
+        testOperationInHashTable(table, Operations.FIND_DALL, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.ADD, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.REMOVE, span, numberOfTests, averageFrom, printFlag);
         testOperationInHashTable(table, Operations.FIND, span, numberOfTests, averageFrom, printFlag);
@@ -518,11 +604,12 @@ public class Tester {
         try {
             fw = new FileWriter(file);
             bw = new BufferedWriter(fw);
-            bw.write("Sample Size;CREATE;DELETE;ADD;REMOVE;FIND\n");
+            bw.write("Sample Size;CREATE;DELETE;FIND_ALL;ADD;REMOVE;FIND\n");
             for (int i = 0; i < sizeList.size(); i++) {
                 String dataChunk = sizeList.get(i) +
                         ";" + creationList.get(i) +
                         ";" + deletionList.get(i) +
+                        ";" + findAllList.get(i) +
                         ";" + additionList.get(i) +
                         ";" + removalList.get(i) +
                         ";" + findList.get(i) +
@@ -548,6 +635,7 @@ public class Tester {
         this.sizeList.clear();
         this.creationList.clear();
         this.deletionList.clear();
+        this.findAllList.clear();
         this.additionList.clear();
         this.removalList.clear();
         this.findList.clear();
@@ -557,6 +645,7 @@ public class Tester {
             System.out.println(this.sizeList.toString());
             System.out.println(this.creationList.toString());
             System.out.println(this.deletionList.toString());
+            System.out.println(this.findAllList.toString());
             System.out.println(this.additionList.toString());
             System.out.println(this.removalList.toString());
             System.out.println(this.findList.toString());
@@ -572,6 +661,9 @@ public class Tester {
             }
             case DELETE -> {
                 this.deletionList.add(sum/count);
+            }
+            case FIND_DALL -> {
+                this.findAllList.add(sum/count);
             }
             case ADD -> {
                 this.additionList.add(sum/count);
